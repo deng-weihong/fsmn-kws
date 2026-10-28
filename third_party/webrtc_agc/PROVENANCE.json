@@ -1,0 +1,94 @@
+{
+  "upstream": "webrtc-audio-processing 0.3",
+  "url": "https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/webrtc-audio-processing-0.3.tar.xz",
+  "archive_sha256": "756e291d4f557d88cd50c4fe3b8454ec238362d22cedb3e6173240d90f0a80fa",
+  "license": "BSD-3-Clause; COPYING and webrtc/PATENTS retained",
+  "files": [
+    {
+      "file": "webrtc/typedefs.h",
+      "upstream_sha256": "71c4d17ce312f64da3cc32700b1118235deb5ba18ad42180280d1b360e1f4b72",
+      "vendored_sha256": "71c4d17ce312f64da3cc32700b1118235deb5ba18ad42180280d1b360e1f4b72",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/modules/audio_processing/agc/legacy/digital_agc.c",
+      "upstream_sha256": "936469ff4fe154aa9ba90547c6816a6456d2897adc607015667a883acbeb6e52",
+      "vendored_sha256": "60e79df845401a01d11be96039c83a74c1ee842b18aa2cb3aa95fcd489f5ad0c",
+      "adapted": true
+    },
+    {
+      "file": "webrtc/modules/audio_processing/agc/legacy/digital_agc.h",
+      "upstream_sha256": "4dc08ac07579bf267701f8c7c1aaa646e02e1c9cdd93fca542f9ed54c6fd644d",
+      "vendored_sha256": "4dc08ac07579bf267701f8c7c1aaa646e02e1c9cdd93fca542f9ed54c6fd644d",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/modules/audio_processing/agc/legacy/gain_control.h",
+      "upstream_sha256": "868fb55fef9f3ad6ccc0451bad14de59a4cb39abbcc69a4fdba8f262ab3f8681",
+      "vendored_sha256": "868fb55fef9f3ad6ccc0451bad14de59a4cb39abbcc69a4fdba8f262ab3f8681",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/division_operations.c",
+      "upstream_sha256": "4fb6e7727707bd81ff3624129c8ea7036c90139b90997c84bcfd4a1c48c2d37d",
+      "vendored_sha256": "4fb6e7727707bd81ff3624129c8ea7036c90139b90997c84bcfd4a1c48c2d37d",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/resample_by_2.c",
+      "upstream_sha256": "cc71dd872d06e910ced45441e33ae601f2ee786a7e788058fda99918c994778d",
+      "vendored_sha256": "cc71dd872d06e910ced45441e33ae601f2ee786a7e788058fda99918c994778d",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/spl_sqrt.c",
+      "upstream_sha256": "5648dcb3905c1fa0b662efda9d56ec682bc8122cba249e4e8c9b19374bb11f98",
+      "vendored_sha256": "5648dcb3905c1fa0b662efda9d56ec682bc8122cba249e4e8c9b19374bb11f98",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/include/signal_processing_library.h",
+      "upstream_sha256": "daf26c5bff329923b92b0e398f992c072c79b9b0765f5241617c9a82659773c2",
+      "vendored_sha256": "daf26c5bff329923b92b0e398f992c072c79b9b0765f5241617c9a82659773c2",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/include/spl_inl.h",
+      "upstream_sha256": "10f649503d8f9e03bbd465817b1e7d4523443a7e0c4ab173652afb428980aabf",
+      "vendored_sha256": "10f649503d8f9e03bbd465817b1e7d4523443a7e0c4ab173652afb428980aabf",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/include/spl_inl_armv7.h",
+      "upstream_sha256": "13784b5d2f2a007f970ebcc7fa592527a1941105eeb41f2dce9f167e8fdaacf3",
+      "vendored_sha256": "13784b5d2f2a007f970ebcc7fa592527a1941105eeb41f2dce9f167e8fdaacf3",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/common_audio/signal_processing/include/spl_inl_mips.h",
+      "upstream_sha256": "9bd379875140cd566929aa64971fda48d778a24ea51d89703c2c260da1127556",
+      "vendored_sha256": "9bd379875140cd566929aa64971fda48d778a24ea51d89703c2c260da1127556",
+      "adapted": false
+    },
+    {
+      "file": "AUTHORS",
+      "upstream_sha256": "705caaeede8c3bc8c8e3f76489864a5b0575b42cb4a38091f88b9126c3e6628d",
+      "vendored_sha256": "705caaeede8c3bc8c8e3f76489864a5b0575b42cb4a38091f88b9126c3e6628d",
+      "adapted": false
+    },
+    {
+      "file": "COPYING",
+      "upstream_sha256": "9b79539028e216e813e152d45f5c1ed5fdd0554426ad50270fb03134e7082dac",
+      "vendored_sha256": "9b79539028e216e813e152d45f5c1ed5fdd0554426ad50270fb03134e7082dac",
+      "adapted": false
+    },
+    {
+      "file": "webrtc/PATENTS",
+      "upstream_sha256": "01462e2068d1a04c2274f3389773014c14ed9bc3446b28303543bd3e3c064145",
+      "vendored_sha256": "01462e2068d1a04c2274f3389773014c14ed9bc3446b28303543bd3e3c064145",
+      "adapted": false
+    }
+  ],
+  "adapted_file": "webrtc/modules/audio_processing/agc/legacy/digital_agc.c",
+  "scope": "Digital AGC and fixed-point primitives only; excludes analog/virtual-microphone gain and noise suppression."
+}

@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "created_utc": "2026-10-28T02:24:11.215436+00:00",
+  "model_sha256": "b7a31242882cfbf29bc2d7973e73dc8eb5077c0c4da3fda2cfe43cee8c28be0b",
+  "reference_binary_sha256": "89d2d787c1211f26a371b0e49742bb105481b26b577a1969b3b3f77c53c4030c",
+  "candidate_binary_sha256": "a573844eca89bcd63ec4f8b2d9625fb27e3dba2abf1085f21417f8916a40c97d",
+  "input_equalizer_sha256": null,
+  "scope": "Same-host extraction regression; not a microphone quality benchmark",
+  "recordings": [
+    {
+      "wav_sha256": "3ad1a268c614076614a2ae6528abc29cc85ae35826d172079d7d9b26a0299559",
+      "blocks": 2250,
+      "events": [
+        {
+          "block": 370,
+          "confidence": 0.917527497,
+          "channel": 1
+        },
+        {
+          "block": 594,
+          "confidence": 0.940115571,
+          "channel": 0
+        },
+        {
+          "block": 868,
+          "confidence": 0.979728699,
+          "channel": 1
+        },
+        {
+          "block": 1158,
+          "confidence": 0.991161346,
+          "channel": 1
+        },
+        {
+          "block": 1398,
+          "confidence": 0.995076239,
+          "channel": 1
+        }
+      ],
+      "event_parity": true,
+      "golden_blocks": [
+        370,
+        594,
+        868,
+        1158,
+        1398
+      ],
+      "golden_passed": true,
+      "trailing_samples_skipped": 0,
+      "metrics": {
+        "enhanced.pcm": {
+          "values": 1440000,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "features.f32": {
+          "values": 180000,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "gains.f32": {
+          "values": 4500,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "context.f32": {
+          "values": 270000,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "posterior.f32": {
+          "values": 5625,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "weights.f32": {
+          "values": 2250,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "wav_sha256": "8ce83bf2a8e6056aba3b3cdc92d2e04d23bdf15a2c1fde814cb091444d59a10b",
+      "blocks": 1653,
+      "events": [
+        {
+          "block": 312,
+          "confidence": 0.868266404,
+          "channel": 0
+        },
+        {
+          "block": 470,
+          "confidence": 0.861207962,
+          "channel": 0
+        },
+        {
+          "block": 610,
+          "confidence": 0.832270622,
+          "channel": 0
+        },
+        {
+          "block": 744,
+          "confidence": 0.618787825,
+          "channel": 0
+        },
+        {
+          "block": 892,
+          "confidence": 0.822124243,
+          "channel": 0
+        },
+        {
+          "block": 1032,
+          "confidence": 0.948772967,
+          "channel": 0
+        },
+        {
+          "block": 1184,
+          "confidence": 0.799794674,
+          "channel": 0
+        },
+        {
+          "block": 1310,
+          "confidence": 0.980581105,
+          "channel": 0
+        },
+        {
+          "block": 1442,
+          "confidence": 0.810562432,
+          "channel": 0
+        },
+        {
+          "block": 1554,
+          "confidence": 0.874509811,
+          "channel": 0
+        }
+      ],
+      "event_parity": true,
+      "golden_blocks": [
+        312,
+        470,
+        610,
+        744,
+        892,
+        1032,
+        1184,
+        1310,
+        1442,
+        1554
+      ],
+      "golden_passed": true,
+      "trailing_samples_skipped": 260,
+      "metrics": {
+        "enhanced.pcm": {
+          "values": 1057920,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "features.f32": {
+          "values": 132240,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "gains.f32": {
+          "values": 3306,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "context.f32": {
+          "values": 198480,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "posterior.f32": {
+          "values": 4135,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        },
+        "weights.f32": {
+          "values": 1654,
+          "bitwise_equal": true,
+          "max_absolute_error": 0,
+          "passed": true
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

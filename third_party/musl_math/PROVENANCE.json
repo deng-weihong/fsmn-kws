@@ -1,0 +1,39 @@
+{
+  "project": "musl libc / Arm single-precision math",
+  "license": "MIT",
+  "retrieved_at": "2026-10-21",
+  "purpose": "Pin FP32 adaptive powers across x86 glibc and ARM uClibc; no native SoundConnect dependency",
+  "local_glue": "libm.h is independently written standalone glue; symbol prefixes were adapted for this project. Upstream files below are unmodified",
+  "sources": [
+    {
+      "file": "powf.c",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/src/math/powf.c",
+      "sha256": "74069b3a380cf954361e0243b38de2094ae680e2ecfb3e50af61ab576f13babf"
+    },
+    {
+      "file": "powf_data.c",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/src/math/powf_data.c",
+      "sha256": "136f491b0f904842b926784134d0adba7a9103d2ce8a226276dd6e9260457398"
+    },
+    {
+      "file": "powf_data.h",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/src/math/powf_data.h",
+      "sha256": "5d632276e5f21cdcd47f35c53cf792640ad347aabce1e1bd5774fad5371fc8d8"
+    },
+    {
+      "file": "exp2f_data.c",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/src/math/exp2f_data.c",
+      "sha256": "3da38c471cc5eb8dc1c2e283c6c00a36b1d353ba5c8ca1e82d95180948e26bd5"
+    },
+    {
+      "file": "exp2f_data.h",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/src/math/exp2f_data.h",
+      "sha256": "fb52b690bef63df2e8996f2d2b3fd77f9ea08795863e73afdc882df04460e850"
+    },
+    {
+      "file": "COPYRIGHT",
+      "url": "https://git.musl-libc.org/cgit/musl/plain/COPYRIGHT",
+      "sha256": "b870108ec5e7790e9f9919064f1b9421d62d5f9b0e6c230c6adf7ea2da62e97b"
+    }
+  ]
+}

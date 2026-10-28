@@ -1,0 +1,58 @@
+{
+  "upstream": "KissFFT 131.1.0",
+  "url": "https://codeload.github.com/mborgerding/kissfft/tar.gz/refs/tags/131.1.0",
+  "archive_sha256": "76c1aac87ddb7258f34b08a13f0eebf9e53afa299857568346aa5c82bcafaf1a",
+  "license": "BSD-3-Clause; COPYING and LICENSES/BSD-3-Clause retained",
+  "files": [
+    {
+      "file": "kiss_fft.c",
+      "upstream_sha256": "3e8af99313c7e94f952ac12db46d3d5c5dd4a9bf93e0c32d43efa5fe39724051",
+      "vendored_sha256": "3e8af99313c7e94f952ac12db46d3d5c5dd4a9bf93e0c32d43efa5fe39724051",
+      "adapted": false
+    },
+    {
+      "file": "kiss_fft.h",
+      "upstream_sha256": "9d6c7ddf520932c0aad669c86c064a24e571e594681be9f1491c14c9c9c75693",
+      "vendored_sha256": "9d6c7ddf520932c0aad669c86c064a24e571e594681be9f1491c14c9c9c75693",
+      "adapted": false
+    },
+    {
+      "file": "kiss_fftr.c",
+      "upstream_sha256": "128b651120725e8d55f6b9edf5d44b06dc022b260894eac078c6ff8aa7159561",
+      "vendored_sha256": "128b651120725e8d55f6b9edf5d44b06dc022b260894eac078c6ff8aa7159561",
+      "adapted": false
+    },
+    {
+      "file": "kiss_fftr.h",
+      "upstream_sha256": "a0f72c1bddc3126d7a51ad80e965b58f6af77e4419aa882a0b11951e783632a8",
+      "vendored_sha256": "a0f72c1bddc3126d7a51ad80e965b58f6af77e4419aa882a0b11951e783632a8",
+      "adapted": false
+    },
+    {
+      "file": "_kiss_fft_guts.h",
+      "upstream_sha256": "dd1731891d0fff0e297198847de39216c5c8b9677ea4fe53160d1f6c74218d40",
+      "vendored_sha256": "dd1731891d0fff0e297198847de39216c5c8b9677ea4fe53160d1f6c74218d40",
+      "adapted": false
+    },
+    {
+      "file": "kiss_fft_log.h",
+      "upstream_sha256": "48b089fccb815b535dcbee88bbcabac702b5f29408563d2cc1d8a311be089afc",
+      "vendored_sha256": "48b089fccb815b535dcbee88bbcabac702b5f29408563d2cc1d8a311be089afc",
+      "adapted": false
+    },
+    {
+      "file": "COPYING",
+      "upstream_sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6",
+      "vendored_sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6",
+      "adapted": false
+    },
+    {
+      "file": "LICENSES/BSD-3-Clause",
+      "upstream_sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed",
+      "vendored_sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed",
+      "adapted": false
+    }
+  ],
+  "adaptations": [],
+  "scope": "Unmodified scalar float32 forward/inverse real FFT; our packing/normalization wrapper is separate."
+}

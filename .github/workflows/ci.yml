@@ -1,0 +1,33 @@
+name: build-and-test
+on: [push, pull_request]
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        build_type: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        shell: bash
+        run: |
+          if [ "${{ matrix.compiler }}" = clang ]; then
+            export CC=clang CXX=clang++
+          else
+            export CC=gcc CXX=g++
+          fi
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+      - name: Build
+        run: cmake --build build -j2
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+      - name: Verify vendored sources
+        run: python3 tools/check_sources.py
+      - name: Install
+        run: cmake --install build --prefix "$RUNNER_TEMP/fsmn-kws"
+      - name: Test installed package
+        run: |
+          cmake -S tests/consumer -B build/consumer -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/fsmn-kws"
+          cmake --build build/consumer
+          build/consumer/consumer

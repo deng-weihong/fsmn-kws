@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "snapshot": "fsmn_lab fixed-default independent reconstruction, reorganized 2026-10-28",
+  "method": "Independent C/C++ implementation informed by checksum-pinned native disassembly, Ghidra pseudocode, extracted default coefficients and stage/state comparisons. Not a clean-room implementation or an original trained model.",
+  "reference_binary": {
+    "name": "py_sound_connect 0.2.1 CPython 3.10 Linux x86_64",
+    "sha256": "ea564494b80c02f32197539f25acd71bba3d07ccb5725d12958b9debf9ee2dd1",
+    "redistributed": false
+  },
+  "sources": [
+    {
+      "files": ["src/frontend/frontend.cpp", "src/model/model.h", "src/decoder/decoder.h", "src/engine.cpp"],
+      "origin": "native/src/engine.cpp",
+      "source_sha256": "2d853b9c90eb560972f0767afab3089c539eb237fba54ae7f907c6897baa23f4",
+      "changes": "Split standalone frontend from model and decoder; neutral namespace; RAII FFT ownership; additional EQ header accepted. Arithmetic order and streaming state preserved."
+    },
+    {
+      "files": ["src/frontend/dsp.c"],
+      "origin": "reference/dsp_reconstruction.c",
+      "source_sha256": "dd3f3e737270aba1575b44b951ec34fa50ab33cee1767a97357cbe08b64bf579",
+      "changes": "Private symbol prefix only"
+    },
+    {
+      "files": ["src/frontend/draec.c"],
+      "origin": "reference/draec_reconstruction.c",
+      "source_sha256": "467b79478c19b5c810d453bdcfd4a07c5a42cbf5f87e3cd1e5120e076109e0e4",
+      "changes": "Private symbol prefix only"
+    },
+    {
+      "files": ["src/frontend/fft.c"],
+      "origin": "reference/fft_reconstruction.c",
+      "source_sha256": "feff5f089cee30d96c3d05d7fc9dc6d24d8dc68308e3ce95d8137bdd1c10e5ef",
+      "changes": "Private symbol prefix only"
+    },
+    {
+      "files": ["src/frontend/agc.c"],
+      "origin": "reference/agc_reconstruction.c",
+      "source_sha256": "f98c2ba161afa8920a03419669e5eaf58ecfd4cc03fe6ea5d59d6e153dbad94a",
+      "changes": "Private symbol prefix only"
+    },
+    {
+      "files": ["src/frontend/defaults.json", "src/frontend/coefficients.h"],
+      "origin": "reference/frontend_default_021.json and generated native/src/coefficients.h",
+      "source_sha256": "0dc87924a6552d090b3ee1112f81f185f6ee4301892173a529d023f830e42d39",
+      "header_source_sha256": "00af38d35a8477bd129a354f8c4f18729fc3a101aa2015c8c027fb84e6d166c4",
+      "method": "Default high-pass and six-phase PPFbank coefficients recovered from native traces; synthesis coefficients reverse phase and sample order. Copied without rounding."
+    },
+    {
+      "files": ["examples/kws_wav.cpp", "examples/wav_io.h", "examples/frontend_wav.cpp"],
+      "origin": "native/src/infer.cpp",
+      "source_sha256": "296682a75ad877dc4a2358756a8fb40b82afe5d3cfcb24af53fa6e638158689e",
+      "changes": "Shared WAV reader, neutral CLI, standalone enhancement example"
+    },
+    {
+      "files": ["examples/kws_stream.cpp"],
+      "origin": "native/src/stream.cpp",
+      "source_sha256": "5dd3ef05ae7f170413e659df1b1f906f952fba760fc772a7ea68f24cd6960d3a",
+      "changes": "Neutral CLI, optional input EQ and consistent level range"
+    }
+  ],
+  "dependencies": [
+    "third_party/kissfft/PROVENANCE.json",
+    "third_party/webrtc_agc/PROVENANCE.json",
+    "third_party/musl_math/PROVENANCE.json"
+  ],
+  "model_manifest": "models/nihaomiya.json",
+  "license_review": "Model card declares Apache-2.0. The reference wheel metadata has License: UNKNOWN and a MIT classifier, with no license text found in the inspected wheel. Reconstruction and recovered-coefficient redistribution require separate review before public release."
+}

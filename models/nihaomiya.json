@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "repository": "https://www.modelscope.cn/iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya",
+  "revision": "3beaea60a917201bd6581f3a39ad4825ff4b2557",
+  "download_base_url": "https://www.modelscope.cn/models/iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya/resolve/3beaea60a917201bd6581f3a39ad4825ff4b2557/",
+  "license": "Apache-2.0",
+  "license_evidence": "README.md at the pinned upstream revision declares Apache License 2.0",
+  "license_evidence_url": "https://www.modelscope.cn/models/iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya/resolve/3beaea60a917201bd6581f3a39ad4825ff4b2557/README.md",
+  "keyword": "ni hao mi ya",
+  "precision": "float32",
+  "topology": "120 -> 144; 5 FSMN layers, projection 68, left order 16, right order 1; 5 outputs; 2-channel max selection",
+  "assets": {
+    "model.txt": {
+      "path": "model.txt",
+      "sha256": "b7a31242882cfbf29bc2d7973e73dc8eb5077c0c4da3fda2cfe43cee8c28be0b"
+    },
+    "3ch_nihaomiya.wav": {
+      "path": "examples/3ch_nihaomiya.wav",
+      "sha256": "3ad1a268c614076614a2ae6528abc29cc85ae35826d172079d7d9b26a0299559"
+    },
+    "3ch_nihaomiya10.wav": {
+      "path": "examples/3ch_nihaomiya10.wav",
+      "sha256": "8ce83bf2a8e6056aba3b3cdc92d2e04d23bdf15a2c1fde814cb091444d59a10b"
+    }
+  }
+}

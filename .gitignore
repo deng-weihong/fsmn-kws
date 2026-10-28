@@ -1,0 +1,15 @@
+/build*/
+/.build/
+/.deps/
+/.venv/
+/models/*.txt
+/models/*.wav
+/models/*.bin
+/recordings/
+/reports/
+/artifacts/
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.pcm
+*.f32

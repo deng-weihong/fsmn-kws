@@ -1,0 +1,12 @@
+FSMN KWS
+Copyright 2026 FSMN KWS contributors
+
+This project provides an independently reconstructed, fixed-default
+Miya-compatible acoustic frontend and CPU FSMN keyword spotting runtime.
+The original Nihaomiya trained model is an upstream ModelScope asset.
+Its authors retain ownership of their model and associated materials.
+
+This distribution includes software developed by Mark Borgerding (KissFFT),
+the WebRTC project authors, and the musl/Arm math library contributors.
+Their copyright notices, licenses and provenance records are preserved
+under third_party/. See THIRD_PARTY_NOTICES.md and docs/provenance.md.

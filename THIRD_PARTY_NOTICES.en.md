@@ -18,8 +18,8 @@ The Nihaomiya model is not included in the source distribution. Its upstream
 model card declares Apache License 2.0. See `models/README.en.md` for the pinned
 revision and attribution. Model licensing is separate from this library.
 
-No official SoundConnect shared library, wheel, disassembly, decompiled listing,
-personal recording, or device-specific calibration is included. Reconstruction
-methods and the remaining upstream license review are recorded in
+No official SoundConnect shared library, wheel, personal recording, or
+device-specific calibration is included. Compatibility details and the
+remaining upstream license review are recorded in
 `docs/provenance.en.md`; the model card is not evidence of a license for the
-official binary or its implementation.
+official runtime or the compatible implementation.

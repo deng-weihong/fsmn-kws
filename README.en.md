@@ -3,8 +3,8 @@
 [简体中文](README.md) | **English**
 
 A C/C++ acoustic frontend and offline keyword spotting runtime for embedded
-Linux. The current implementation reconstructs the fixed-default Miya pipeline
-and runs the original ModelScope **Nihaomiya** model on CPU in FP32.
+Linux. The current implementation is compatible with the fixed-default Miya
+pipeline and runs the original ModelScope **Nihaomiya** model on CPU in FP32.
 
 The frontend can be used without a model. Model weights are downloaded
 separately from their upstream source. The runtime builds offline with the

@@ -2,7 +2,7 @@
 
 **简体中文** | [English](README.en.md)
 
-面向嵌入式 Linux 的 C/C++ 声学前端与离线语音唤醒运行库。当前实现独立重建了 Miya 的固定默认处理链路，使用 ModelScope 原始 **“你好米雅”（Nihaomiya）** 模型，在 CPU 上执行 FP32 推理。
+面向嵌入式 Linux 的 C/C++ 声学前端与离线语音唤醒运行库。当前实现兼容 Miya 的固定默认处理链路，使用 ModelScope 原始 **“你好米雅”（Nihaomiya）** 模型，在 CPU 上执行 FP32 推理。
 
 声学前端可以脱离模型单独使用。模型权重从上游单独下载；运行库使用仓库内保留的 DSP 依赖源码离线构建，运行时不加载官方 SoundConnect 库。实现来源及许可核实状态见[来源说明](docs/provenance.md)。
 

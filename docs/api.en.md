@@ -81,7 +81,7 @@ The compatibility header `MIYA_INPUT_EQ_V1` is also accepted. Gains must be
 finite, in `[0.01, 32]`, with exactly 642 values. They correspond to 0, 25,
 50, ..., 8000 Hz and multiply the microphone spectra after analysis and
 before AEC. The playback reference is unchanged. Packed DC and Nyquist bins
-are handled separately. An empty path keeps the reconstructed default chain.
+are handled separately. An empty path keeps the default chain.
 
 No measured device profile is shipped. Calibration may include the loudspeaker,
 room and microphone together; it should not be presented as a universal

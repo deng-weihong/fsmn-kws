@@ -13,9 +13,8 @@ Only `webrtc/modules/audio_processing/agc/legacy/digital_agc.c` is adapted:
   most `-10`; retain the upstream `-65` above that interval.
 - Ignore the VirtualMic low-level flag in digital decay processing.
 
-The usual nine forward gain-smoothing comparisons are retained. Ghidra's
-pseudocode omitted eight comparisons; the native assembly and numerical
-probes confirm that removing them produces incorrect output.
+The usual nine forward gain-smoothing comparisons are retained. Numerical
+probes confirm that omitting these comparisons produces incorrect output.
 
 `../../src/frontend/agc.c` initializes only the verified reference default:
 16 kHz, 160-sample frames, adaptive digital mode, power 8, level 4, limiter

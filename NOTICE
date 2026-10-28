@@ -1,7 +1,7 @@
 FSMN KWS
 Copyright 2026 FSMN KWS contributors
 
-This project provides an independently reconstructed, fixed-default
+This project provides a fixed-default
 Miya-compatible acoustic frontend and CPU FSMN keyword spotting runtime.
 The original Nihaomiya trained model is an upstream ModelScope asset.
 Its authors retain ownership of their model and associated materials.

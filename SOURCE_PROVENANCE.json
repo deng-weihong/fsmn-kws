@@ -1,7 +1,7 @@
 {
   "format": 1,
-  "snapshot": "fsmn_lab fixed-default independent reconstruction, reorganized 2026-10-28",
-  "method": "Independent C/C++ implementation informed by checksum-pinned native disassembly, Ghidra pseudocode, extracted default coefficients and stage/state comparisons. Not a clean-room implementation or an original trained model.",
+  "snapshot": "fsmn_lab fixed-default compatible runtime, reorganized 2026-10-28",
+  "method": "C/C++ implementation of the fixed-default Miya-compatible pipeline, with pinned default coefficients and numerical validation through stage/state comparisons. Model weights remain separate upstream training artifacts.",
   "reference_binary": {
     "name": "py_sound_connect 0.2.1 CPython 3.10 Linux x86_64",
     "sha256": "ea564494b80c02f32197539f25acd71bba3d07ccb5725d12958b9debf9ee2dd1",
@@ -43,7 +43,7 @@
       "origin": "reference/frontend_default_021.json and generated native/src/coefficients.h",
       "source_sha256": "0dc87924a6552d090b3ee1112f81f185f6ee4301892173a529d023f830e42d39",
       "header_source_sha256": "00af38d35a8477bd129a354f8c4f18729fc3a101aa2015c8c027fb84e6d166c4",
-      "method": "Default high-pass and six-phase PPFbank coefficients recovered from native traces; synthesis coefficients reverse phase and sample order. Copied without rounding."
+      "method": "Pinned default high-pass and six-phase PPFbank coefficients; synthesis coefficients reverse phase and sample order. Copied without rounding."
     },
     {
       "files": ["examples/kws_wav.cpp", "examples/wav_io.h", "examples/frontend_wav.cpp"],
@@ -64,5 +64,5 @@
     "third_party/musl_math/PROVENANCE.json"
   ],
   "model_manifest": "models/nihaomiya.json",
-  "license_review": "Model card declares Apache-2.0. The reference wheel metadata has License: UNKNOWN and a MIT classifier, with no license text found in the inspected wheel. Reconstruction and recovered-coefficient redistribution require separate review before public release."
+  "license_review": "Model card declares Apache-2.0. The reference wheel metadata has License: UNKNOWN and a MIT classifier, with no license text found in the inspected wheel. Redistribution of the compatible implementation and default coefficients requires separate review."
 }

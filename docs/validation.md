@@ -1,54 +1,40 @@
-# Validation
+# 验证说明
 
-## Offline Checks
+**简体中文** | [English](validation.en.md)
 
-`ctest` exercises the independent frontend, missing-reference behavior, stream
-reset, input immutability, calibration validation, the model clock, synthetic
-model parsing, decoder phrase/channel behavior, and CLI output protection.
-The C++ tests run without Python or downloaded weights. Optional Python CLI
-tests use only the standard library. Generated signals and synthetic model
-weights are software fixtures, not speech recognition benchmarks.
+## 离线检查
 
-`python3 tools/check_sources.py` verifies the vendored upstream file hashes.
+`ctest` 覆盖独立前端、缺省播放参考、流重置、输入不变性、校正参数验证、模型时序、合成模型读取、解码器关键词与通道行为，以及命令行输出保护。
 
-## Extraction Checks on 2026-10-28
+C++ 测试无需 Python 或下载模型。可选的 Python 命令行测试仅使用标准库。生成信号和合成权重仅用于软件验证，不属于真实语音识别基准。
 
-- Linux x86_64, GCC 11.4: Release build and all three CTest groups passed.
-- Exported source-only tree: offline configure, build, all tests and dependency
-  verification passed without downloaded model assets or the original project.
-- Installed static library: a separate C++11 consumer configured, linked and ran.
-- Rockchip GCC 8.3: ARMv7-A hard-float library and all three Linux examples
-  cross-compiled successfully. The extracted binaries were not run on a device.
-- Two pinned upstream recordings: all six dump types were byte-identical to
-  the original independent implementation; all 15 wake events matched.
-- PCM stream CLI: both recordings reproduced the WAV CLI's event blocks,
-  scores and selected microphones exactly.
+运行 `python3 tools/check_sources.py` 可验证保留的上游源码文件哈希。
 
-The configured GCC/Clang CI matrix is provided for future repository runs;
-Clang was not available for the local checks above.
+## 2026-10-28 提取验证
 
-## Reference Regression
+- Linux x86_64、GCC 11.4：Release 构建及全部三组 CTest 通过。
+- 独立导出的纯源码目录：未提供下载模型或原工程，离线配置、构建、全部测试和依赖校验通过。
+- 安装后的静态库：独立 C++11 应用完成配置、链接和运行。
+- Rockchip GCC 8.3：ARMv7-A 硬浮点运行库和三个 Linux 示例交叉编译通过；提取后的二进制尚未在设备上运行。
+- 两段固定上游录音：六类中间输出与原独立实现逐字节相同，全部 15 次唤醒事件一致。
+- PCM 流式命令行：两段录音的事件块号、分数及所选麦克风与 WAV 命令行完全一致。
 
-Fetch the pinned upstream model and two recordings using
-`python3 tools/fetch_model.py --examples`. With the default level `0.81` and
-no device EQ, the expected event block numbers are:
+仓库已配置 GCC / Clang CI 矩阵，供后续运行。上述本地检查环境未提供 Clang。
 
-| Recording | Events | Input Block Numbers |
+## 参考回归
+
+通过 `python3 tools/fetch_model.py --examples` 获取固定版本的上游模型和两段录音。默认阈值为 `0.81`、不启用设备 EQ 时，预期事件块号如下：
+
+| 录音 | 次数 | 输入块号 |
 | --- | --- | --- |
-| `3ch_nihaomiya.wav` | 5 | 370, 594, 868, 1158, 1398 |
-| `3ch_nihaomiya10.wav` | 10 | 312, 470, 610, 744, 892, 1032, 1184, 1310, 1442, 1554 |
+| `3ch_nihaomiya.wav` | 5 | 370、594、868、1158、1398 |
+| `3ch_nihaomiya10.wav` | 10 | 312、470、610、744、892、1032、1184、1310、1442、1554 |
 
-Input times are block numbers multiplied by 20 ms. An incomplete final block
-is skipped, and reported separately. Frontend and decoder state start empty.
+输入时间为块号乘以 20 ms。末尾不足一个完整块的采样会被跳过并单独记录。前端和解码器均从空状态开始。
 
-`tools/check_regression.py` compares this extraction with an independently
-supplied compatible reference CLI. It runs both binaries with identical model,
-WAV and optional EQ paths in an isolated temporary directory. It compares
-enhanced PCM, Fbank, AGC gains, contexts, posteriors, channel weights and events.
-The extraction acceptance criterion is byte equality on the same host/toolchain.
-The report contains asset/binary hashes and results, not local input paths.
-The checked-in [extraction report](extraction-regression.json) records both
-recordings: all six dump types match byte-for-byte and all 15 events agree.
+`tools/check_regression.py` 将本次提取与调用者单独提供的兼容参考命令行进行比较。工具在隔离的临时目录中，使用相同模型、WAV 和可选 EQ 路径运行两个二进制，对比增强 PCM、Fbank、AGC 增益、上下文、后验概率、通道权重及事件。
+
+提取验收标准是在同一宿主机和工具链下逐字节相等。报告记录资源及二进制哈希和比较结果，不记录本地输入路径。已纳入仓库的[提取报告](extraction-regression.json)包含两段录音的结果：六类输出逐字节相同，全部 15 次事件一致。
 
 ```sh
 python3 tools/check_regression.py \
@@ -58,15 +44,10 @@ python3 tools/check_regression.py \
   --report reports/extraction.json
 ```
 
-## Platform and Quality Boundaries
+## 平台与效果边界
 
-This extraction targets Linux x86_64 and cross-compilation for Linux ARM
-using GCC or Clang. Same-host numerical regression does not certify another
-toolchain, library, CPU, device capture path or microphone array.
-The original implementation had RV1106 measurements; the extracted library
-requires its own target verification before deployment.
+本次提取面向 Linux x86_64，并支持使用 GCC 或 Clang 为 Linux ARM 交叉编译。同一宿主机上的数值回归不能证明其他工具链、C 库、CPU、设备采集路径或麦克风阵列已经通过验证。
 
-The two recordings establish fixed-default implementation regression only.
-Far-field recall, quiet first-pass speech, noise robustness and false wakes
-per hour require separate labeled recordings and long-duration background tests.
-Measured device EQ is optional and is not part of the reference baseline.
+原实现有 RV1106 测量记录，提取后的运行库在部署前仍需单独验证目标设备。
+
+两段录音仅验证固定默认配置的实现回归。远场召回、小声首遍唤醒、抗噪效果和每小时误唤醒次数，需要额外的带标签录音及长时间背景声测试。实测设备 EQ 属于可选功能，不属于参考基线。

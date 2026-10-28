@@ -79,11 +79,12 @@ write_basic_package_version_file(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/fsmn_kwsConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/fsmn_kwsConfigVersion.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/fsmn_kws)
-install(FILES LICENSE NOTICE THIRD_PARTY_NOTICES.md SOURCE_PROVENANCE.json
+install(FILES README.md README.en.md LICENSE NOTICE
+              THIRD_PARTY_NOTICES.md THIRD_PARTY_NOTICES.en.md SOURCE_PROVENANCE.json
     DESTINATION ${CMAKE_INSTALL_DATADIR}/fsmn_kws)
 install(DIRECTORY docs/ DESTINATION ${CMAKE_INSTALL_DATADIR}/fsmn_kws/docs
     FILES_MATCHING PATTERN "*.md" PATTERN "*.json")
-install(FILES models/README.md models/nihaomiya.json
+install(FILES models/README.md models/README.en.md models/nihaomiya.json
     DESTINATION ${CMAKE_INSTALL_DATADIR}/fsmn_kws/models)
 install(DIRECTORY third_party/ DESTINATION ${CMAKE_INSTALL_DATADIR}/fsmn_kws/third_party
     FILES_MATCHING PATTERN "COPYING" PATTERN "COPYRIGHT" PATTERN "PATENTS"

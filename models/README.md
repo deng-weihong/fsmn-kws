@@ -1,29 +1,18 @@
-# Nihaomiya Model Assets
+# Nihaomiya 模型资源
 
-Upstream: [ModelScope iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya](https://www.modelscope.cn/iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya).
-The upstream authors trained this model; this project supplies a compatible
-runtime and has not retrained or changed its parameters.
+**简体中文** | [English](README.en.md)
 
-`nihaomiya.json` records revision
-`3beaea60a917201bd6581f3a39ad4825ff4b2557`, SHA256 checksums, topology and the
-upstream model card's Apache License 2.0 declaration. This declaration is
-specific to the upstream model repository, not the official binary runtime.
+上游：[ModelScope iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya](https://www.modelscope.cn/iic/speech_dfsmn_kws_char_farfield_16k_nihaomiya)。模型由上游作者训练，本项目提供兼容运行库，没有重新训练或修改模型参数。
+
+`nihaomiya.json` 记录了固定版本 `3beaea60a917201bd6581f3a39ad4825ff4b2557`、SHA256 校验值、模型拓扑，以及上游模型卡中声明的 Apache License 2.0。该声明针对上游模型仓库，不代表官方二进制运行库的许可。
 
 ```sh
 python3 tools/fetch_model.py
 python3 tools/fetch_model.py --examples
 ```
 
-The script uses Python's standard library. It downloads directly from the
-pinned official URLs, verifies SHA256 before exposing a file, reuses matching
-files, and rejects existing files with different contents. It does not install
-ModelScope, PyTorch, or the official SoundConnect wheel.
+脚本仅使用 Python 标准库，直接从固定版本的官方地址下载。文件对外可见前会校验 SHA256；已有文件内容一致时复用，内容不一致时拒绝覆盖。脚本不会安装 ModelScope、PyTorch 或官方 SoundConnect wheel。
 
-Weights and example recordings are ignored by Git and are not part of the source
-distribution. Users downloading or redistributing upstream assets should retain
-the upstream attribution and applicable license. Do not describe these weights
-as trained by FSMN KWS.
+权重和示例录音已被 Git 忽略，不属于源码发布包。下载或再分发上游资源时，应保留上游署名和适用许可证，不应将这些权重描述为由 FSMN KWS 训练。
 
-Supported format: the original text model containing signed integer encodings
-of IEEE-754 FP32 words, with the original fixed topology. The reader checks
-defined header fields, finite values, required sizes and trailing content.
+支持格式为原始文本模型：使用有符号整数编码 IEEE-754 FP32 数据，并保留原始固定拓扑。读取器会检查已定义的头部字段、数值有限性、所需数据长度以及尾部多余内容。

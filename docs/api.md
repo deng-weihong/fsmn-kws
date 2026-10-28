@@ -1,86 +1,63 @@
-# Runtime Contract
+# 运行接口约定
 
-## Input and Clocks
+**简体中文** | [English](api.en.md)
 
-Both APIs accept exactly 320 samples per channel at 16 kHz, corresponding to
-20 ms. Inputs are raw signed PCM16 microphone 0 and microphone 1. An optional
-third pointer supplies a playback reference already synchronized to capture.
-Null reference means zeros. Microphone pointers must be non-null and input
-buffers are not modified.
+## 输入与时序
 
-Do not feed already enhanced or software-amplified audio to this frontend
-without validating the resulting processing chain. Playback synchronization
-and sound-card capture are the responsibility of the application.
+两个接口均要求每路输入恰好 320 个采样，采样率为 16 kHz，对应 20 ms。输入为麦克风 0、麦克风 1 的原始有符号 PCM16 数据。可选的第三个指针提供已与采集时间轴同步的播放参考。
 
-`FrontendOutput` contains:
+参考指针为空时按零输入处理。两个麦克风指针必须非空，接口不会修改输入缓冲区。
 
-| Field | Layout | Frequency |
+在验证完整处理链路之前，不应将已经增强或经软件放大的音频直接送入此前端。播放参考同步和声卡采集由应用负责。
+
+`FrontendOutput` 包含以下字段：
+
+| 字段 | 布局 | 输出频率 |
 | --- | --- | --- |
-| `block` | Zero-based input block number | Every 20 ms |
-| `enhanced` | Interleaved `int16_t[320 * 2]` | Every 20 ms |
-| `features` | Channel-major `float[2 * 40]` | Every 20 ms |
-| `gains` | `float[2]`, measured AGC L1 gain | Every 20 ms |
+| `block` | 从零开始的输入块号 | 每 20 ms |
+| `enhanced` | 交错排列的 `int16_t[320 * 2]` | 每 20 ms |
+| `features` | 按通道排列的 `float[2 * 40]` | 每 20 ms |
+| `gains` | `float[2]`，实测 AGC L1 增益 | 每 20 ms |
 
-`Engine::step()` returns `Output`, whose `frontend` field contains the same
-acoustic output. The model is evaluated on input blocks 0, 2, 4, and so on.
-Its fields are valid only when `evaluated` is true; otherwise they are zero.
+`Engine::step()` 返回 `Output`，其中 `frontend` 字段包含相同的声学输出。模型在输入块 0、2、4 等偶数块执行计算。模型字段仅在 `evaluated` 为真时有效，其他块上的这些字段为零。
 
-| Model Field | Meaning |
+| 模型字段 | 含义 |
 | --- | --- |
-| `context` | Channel-major `[2, 120]`, two older selected feature frames then current |
-| `posterior` | Five class probabilities: filler, ni, hao, mi, ya |
-| `channel_weights` | Per-channel positive-activation winner fractions |
-| `detected` | A completed keyword event |
-| `confidence` | Adaptive HMM keyword score; not a calibrated probability |
-| `channel` | Selected microphone, zero or one |
+| `context` | 按通道排列的 `[2, 120]`，依次拼接前两帧被选中特征和当前帧 |
+| `posterior` | 五类概率：filler（非目标）、你、好、米、雅 |
+| `channel_weights` | 每路通道在正激活单元中获胜的比例 |
+| `detected` | 已完成一次关键词检测事件 |
+| `confidence` | 自适应 HMM 关键词分数，并非校准后的概率 |
+| `channel` | 选中的麦克风，取值为 0 或 1 |
 
-The FSMN has five layers with one model frame of lookahead each, totaling
-200 ms. Reported event time is the processing position of the input block,
-not a recovered speech onset or measured UI latency.
+FSMN 共五层，每层前看一个模型帧，合计 200 ms。事件时间表示对应输入块的处理位置，不是回溯得到的语音起点，也不是实测 UI 响应延迟。
 
-## State and Lifetime
+## 状态与生命周期
 
-Use one instance per continuous stream and serialize calls to it. Constructor
-allocations create FFT plans, DSP histories and model parameters. Normal
-`step()` processing does not allocate memory dynamically.
+每条连续音频流使用一个实例，调用必须串行执行。构造阶段分配 FFT 计划、DSP 历史状态及模型参数；正常的 `step()` 处理不会动态分配内存。
 
-Call `reset()` after a dropped block, reconnect or other stream discontinuity.
-It clears adaptive filters, AGC and all histories; the complete engine also
-clears model context and decoder state. Block numbering restarts at zero.
-Keep state across successful detections. Arbitrary repeated resets can reduce
-recognition quality because the adaptive frontend needs history.
+丢块、重连或其他流中断后，应调用 `reset()`。它会清空自适应滤波器、AGC 和所有历史；完整引擎还会清空模型上下文和解码器状态。块号重新从零开始。
 
-Bad model/calibration files and invalid arguments throw `std::runtime_error`.
-A processing failure should be followed by a reset or stream reconstruction
-before consuming further audio.
+成功检测后应保留状态。自适应前端依赖历史，随意反复重置可能降低识别效果。
 
-## Decoder Level
+模型文件、校正文件或参数无效时会抛出 `std::runtime_error`。处理失败后，应重置或重建处理实例，再继续消费后续音频。
 
-The default main level is `0.81`, secondary level `0.01`, night level `0.96`,
-and adaptive recovery timer 500 model frames (20 seconds). The public main
-level accepts finite values in `[0, 1]`. Level zero selects the reference
-zero-level detection policy; it does not disable detection.
+## 解码阈值
 
-Adaptive state can produce scores below the configured main level. An
-additional fixed confidence filter changes reference behavior. Threshold
-selection for a new device requires labeled positive and background audio.
+默认主阈值为 `0.81`，次级阈值为 `0.01`，夜间阈值为 `0.96`，自适应恢复计时为 500 个模型帧，即 20 秒。公开接口的主阈值接受 `[0, 1]` 内的有限数值。设为零会启用参考实现的零阈值检测策略，并不会关闭检测。
 
-## Optional Device Calibration
+自适应状态下，事件分数可能低于配置的主阈值。额外增加固定置信度过滤会改变参考行为。新设备的阈值选择需要使用带标签的正样本和背景音频进行评估。
 
-All examples and APIs accept an optional input EQ path. The file contains:
+## 可选设备校正
+
+所有示例和接口均接受可选的输入 EQ 文件路径，文件格式为：
 
 ```text
 FSMN_KWS_INPUT_EQ_V1 16000 2 321
-<321 gains for microphone 0>
-<321 gains for microphone 1>
+<麦克风 0 的 321 个增益值>
+<麦克风 1 的 321 个增益值>
 ```
 
-The compatibility header `MIYA_INPUT_EQ_V1` is also accepted. Gains must be
-finite, in `[0.01, 32]`, with exactly 642 values. They correspond to 0, 25,
-50, ..., 8000 Hz and multiply the microphone spectra after analysis and
-before AEC. The playback reference is unchanged. Packed DC and Nyquist bins
-are handled separately. An empty path keeps the reconstructed default chain.
+同时兼容文件头 `MIYA_INPUT_EQ_V1`。增益必须为 `[0.01, 32]` 范围内的有限数值，总计恰好 642 个。它们依次对应 0、25、50、……、8000 Hz，在分析后、AEC 前乘到麦克风频谱上；播放参考保持不变。打包存储的 DC 和 Nyquist 分量分别处理。路径为空时保留重建的默认处理链路。
 
-No measured device profile is shipped. Calibration may include the loudspeaker,
-room and microphone together; it should not be presented as a universal
-microphone correction.
+仓库未附带实测设备校正文件。校正可能同时包含扬声器、房间和麦克风的影响，不能将其描述为通用麦克风补偿。

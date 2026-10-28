@@ -1,49 +1,33 @@
-# Implementation Origins
+# 实现来源
 
-The runtime was extracted from a local experimental implementation named
-`fsmn_lab`. `SOURCE_PROVENANCE.json` records the original source hashes and
-the changes made during extraction. Numerical behavior is preserved by
-regression testing, not by changing the processing algorithms.
+**简体中文** | [English](provenance.en.md)
 
-## Reconstruction Method
+本运行库从名为 `fsmn_lab` 的本地实验实现中提取。`SOURCE_PROVENANCE.json` 记录了原始源码哈希及提取时的修改。迁移通过回归测试保持数值行为，没有更换处理算法。
 
-The fixed-default pipeline was reconstructed using a checksum-pinned
-`py_sound_connect 0.2.1` Linux x86_64 binary, its disassembly, Ghidra pseudocode,
-extracted defaults, and native stage/state comparisons. Its SHA256 is
-`ea564494b80c02f32197539f25acd71bba3d07ccb5725d12958b9debf9ee2dd1`.
+## 重建方法
 
-This is an independent compatible implementation, not a clean-room design.
-The proprietary original source was not recovered. No official shared library
-is linked or loaded at runtime, and no official binary, trace, disassembly,
-decompiler output, or private recording is included in this source tree.
+固定默认链路的重建参考了校验值固定的 `py_sound_connect 0.2.1` Linux x86_64 二进制、反汇编、Ghidra 伪代码、提取的默认参数，以及原生阶段输出和内部状态对照。参考二进制的 SHA256 为：
 
-The high-pass and six-phase PPFbank coefficients were recovered from native
-traces. The checked-in `src/frontend/defaults.json` retains the exact defaults;
-`coefficients.h` freezes their binary FP32 values for Python-free builds.
-Model parameters remain separate upstream training artifacts.
+```text
+ea564494b80c02f32197539f25acd71bba3d07ccb5725d12958b9debf9ee2dd1
+```
 
-KissFFT is unmodified public source. WebRTC's public digital AGC is adapted
-to the observed default state behavior. Selected musl/Arm math files preserve
-FP32 power rounding across host and target libraries. Individual dependency
-provenance and adaptation records are retained under `third_party`.
+这是独立的兼容实现，不属于净室（clean-room）设计。原始闭源源码并未被恢复。运行时不链接或加载官方共享库；源码树不包含官方二进制、trace、反汇编、反编译输出或私人录音。
 
-## License Evidence and Release Status
+高通和六相 PPFbank 系数通过原生 trace 恢复。仓库中的 `src/frontend/defaults.json` 保留精确默认参数，`coefficients.h` 固定其二进制 FP32 数值，使构建无需 Python。模型参数仍是单独的上游训练资源。
 
-The upstream model card at the pinned revision declares Apache License 2.0.
-The inspected reference wheel metadata contains `License: UNKNOWN` and an
-MIT license classifier; no corresponding license text was found in that wheel.
-The model card does not resolve the binary's terms or the publication rights
-for reconstructed implementation details and recovered coefficients.
+KissFFT 使用未修改的公开源码。WebRTC 公开数字 AGC 根据观察到的默认状态行为进行了适配。选取的 musl / Arm 数学文件用于保持宿主机与目标设备 C 库之间 FP32 幂运算的舍入一致。各依赖的来源和修改记录保存在 `third_party` 下。
 
-The local extraction is prepared for review. Verify the applicable upstream
-terms and the redistribution boundary for the reconstruction and constants
-before publishing it. The project's Apache license applies to contributions
-its authors are entitled to license; it does not grant rights to upstream
-binaries, models or third-party works beyond their own licenses.
+## 许可依据与发布状态
 
-## Attribution
+固定版本的上游模型卡声明采用 Apache License 2.0。已检查的参考 wheel 元数据包含 `License: UNKNOWN` 和 MIT 许可证分类标记，但未在该 wheel 中发现对应的许可证正文。
 
-Describe this project as a fixed-default, Miya-compatible C/C++ frontend and
-FSMN runtime. Credit the ModelScope upstream model authors and retained DSP
-dependencies. Reference matching is evidence for the tested files and defaults,
-not a claim of endorsement or universal microphone performance.
+模型卡不能确定官方二进制的使用条款，也不能确定重建实现细节及恢复系数的发布权利。
+
+本次提取已整理供审阅。发布前仍需核实适用的上游条款，以及重建实现和常量的再分发边界。本项目 Apache 许可证仅适用于作者有权许可的贡献，不会额外授予上游二进制、模型或第三方作品超出其自身许可证范围的权利。
+
+## 署名
+
+对外应描述为固定默认参数、兼容 Miya 的 C/C++ 声学前端和 FSMN 运行库，并保留 ModelScope 上游模型作者及 DSP 依赖的署名。
+
+参考结果一致只能证明已测试录音与默认配置的行为，不能代表上游认可或对所有麦克风场景的性能保证。

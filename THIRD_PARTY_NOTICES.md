@@ -1,23 +1,17 @@
-# Third-Party Notices
+# 第三方声明
 
-The project's own contributions are offered under Apache License 2.0.
-Third-party files retain their original notices and licenses.
+**简体中文** | [English](THIRD_PARTY_NOTICES.en.md)
 
-| Component | License | Included Notices | Changes |
+本项目自身贡献采用 Apache License 2.0。第三方文件保留原有版权声明和许可证原文。
+
+| 组件 | 许可证 | 保留的声明 | 修改情况 |
 | --- | --- | --- | --- |
-| KissFFT 131.1.0 | BSD-3-Clause | `third_party/kissfft/COPYING`, `LICENSES/BSD-3-Clause` | Upstream files unmodified; separate packing wrapper |
-| WebRTC audio processing 0.3 digital AGC | BSD-3-Clause, accompanying patent grant | `third_party/webrtc_agc/COPYING`, `AUTHORS`, `webrtc/PATENTS` | Adapted digital AGC, documented in its README and provenance |
-| musl / Arm FP32 math | MIT and retained per-file notices | `third_party/musl_math/COPYRIGHT` and source headers | Selected upstream files unmodified; local glue and symbol prefixes |
+| KissFFT 131.1.0 | BSD-3-Clause | `third_party/kissfft/COPYING`、`LICENSES/BSD-3-Clause` | 上游文件未修改，频谱打包包装层单独实现 |
+| WebRTC audio processing 0.3 数字 AGC | BSD-3-Clause 及随附专利授权 | `third_party/webrtc_agc/COPYING`、`AUTHORS`、`webrtc/PATENTS` | 数字 AGC 已适配，修改记录见其 README 和来源清单 |
+| musl / Arm FP32 数学实现 | MIT 及各文件保留的声明 | `third_party/musl_math/COPYRIGHT` 和源码文件头 | 选取的上游文件未修改，另有本地适配代码和符号前缀 |
 
-Each dependency includes a `PROVENANCE.json` with source URLs and checksums.
-Run `python3 tools/check_sources.py` to verify the vendored upstream files.
+每个依赖均包含 `PROVENANCE.json`，记录来源地址和校验值。运行 `python3 tools/check_sources.py` 可验证保留的上游文件。
 
-The Nihaomiya model is not included in the source distribution. Its upstream
-model card declares Apache License 2.0. See `models/README.md` for the pinned
-revision and attribution. Model licensing is separate from this library.
+Nihaomiya 模型不包含在源码发布包中。其上游模型卡声明采用 Apache License 2.0，固定版本和署名见[模型说明](models/README.md)。模型许可与本运行库分开处理。
 
-No official SoundConnect shared library, wheel, disassembly, decompiled listing,
-personal recording, or device-specific calibration is included. Reconstruction
-methods and the remaining upstream license review are recorded in
-`docs/provenance.md`; the model card is not evidence of a license for the
-official binary or its implementation.
+仓库未包含官方 SoundConnect 共享库、wheel、反汇编、反编译清单、个人录音或设备专用校正参数。重建方法及尚需核实的上游许可事项见[来源说明](docs/provenance.md)；模型卡不能作为官方二进制或其实现的许可依据。

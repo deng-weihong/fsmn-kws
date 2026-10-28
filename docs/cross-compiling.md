@@ -1,7 +1,8 @@
-# Cross-Compiling for Embedded Linux
+# 嵌入式 Linux 交叉编译
 
-The library has no sound-card, Python or service dependencies. Supply a Linux
-cross toolchain and disable host tests. For an ARMv7 hard-float GCC toolchain:
+**简体中文** | [English](cross-compiling.en.md)
+
+运行库不依赖声卡接口、Python 或设备服务。提供 Linux 交叉工具链并关闭宿主机测试即可构建。以 ARMv7 硬浮点 GCC 工具链为例：
 
 ```sh
 cmake -S . -B build-arm \
@@ -12,24 +13,18 @@ cmake -S . -B build-arm \
 cmake --build build-arm -j4
 ```
 
-Use the compiler names and target sysroot provided by the actual SDK. Pass
-`CMAKE_SYSROOT` when the toolchain requires an external sysroot. RV1106 uses
-the Rockchip ARMv7-A/Cortex-A7 toolchain; a typical SDK needs
-`-march=armv7-a -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard`.
-These flags belong in the toolchain file or `CMAKE_C_FLAGS`/`CMAKE_CXX_FLAGS`.
+请使用实际 SDK 提供的编译器名称和目标 sysroot。工具链要求外部 sysroot 时，传入 `CMAKE_SYSROOT`。RV1106 使用 Rockchip ARMv7-A / Cortex-A7 工具链，典型 SDK 需要以下参数：
 
-`FSMN_KWS_PORTABLE_MATH` defaults to `ON` to stabilize adaptive FP32 powers
-across C libraries. Preserve `-ffp-contract=off`, disabled fast-math and the
-fixed-point wrapping flags. A compiler change still requires reference checks.
+```text
+-march=armv7-a -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
+```
 
-The generated coefficient header uses exact hexadecimal FP32 literals, so
-the library is compiled as C++17. Its installed public API requires C++11.
+这些参数应放入工具链文件，或通过 `CMAKE_C_FLAGS`、`CMAKE_CXX_FLAGS` 传入。
 
-The examples use POSIX clocks and resource accounting and run on Linux.
-Applications can link only the library with `FSMN_KWS_BUILD_EXAMPLES=OFF` and
-provide their own capture/PCM buffering. Processing remains fixed at 16 kHz
-and exactly 320 samples per channel per call.
+`FSMN_KWS_PORTABLE_MATH` 默认开启，用于稳定不同 C 库之间自适应计算的 FP32 幂运算舍入。应保留 `-ffp-contract=off`、关闭 fast-math，以及定点整数回绕相关的编译参数。更换编译器后仍需进行参考对照。
 
-Cross-compilation alone is not a device test. Run the same reference recordings
-on the target and compare enhanced PCM, features, model probabilities and
-event blocks before connecting a live microphone stream.
+生成的系数头文件使用精确的十六进制 FP32 字面量，因此运行库使用 C++17 编译；安装后的公开接口要求 C++11。
+
+示例使用 POSIX 时钟和资源统计接口，运行于 Linux。应用可设置 `FSMN_KWS_BUILD_EXAMPLES=OFF`，仅链接运行库并自行提供音频采集与 PCM 缓冲。处理格式固定为 16 kHz，每次调用每路恰好 320 个采样。
+
+交叉编译通过并不代表设备验证通过。接入实时麦克风之前，应在目标设备运行相同参考录音，对比增强 PCM、特征、模型概率和事件块号。
